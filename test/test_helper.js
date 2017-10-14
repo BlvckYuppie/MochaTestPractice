@@ -1,8 +1,21 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb://localhost:users_test/users_test");
-mongoose.connection
-  .once("open", () => console.log("DB Running =]"))
-  .on("error", (error) => {
-    console.warn("Warning", error);
+
+before((done) => {
+  mongoose.connect("mongodb://localhost:users_test/users_test");
+  mongoose.connection
+    .once("open",() => {
+      done();
+    })
+    .on("error", (error) => {
+      console.warn("Warning", error);
+    });
+});
+
+
+beforeEach((done) => {
+  return mongoose.connection.collections.users.drop(() => {
+    done();
   });
+});
