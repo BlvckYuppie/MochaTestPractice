@@ -1,0 +1,16 @@
+{
+  "name": "users",
+  "version": "1.0.0",
+  "description": "Mongo Tutorial from Scratch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Denzel C. Adams (Corduroy)",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "mongoose": "^4.12.1"
+  }
+}
