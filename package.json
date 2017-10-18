@@ -4,7 +4,7 @@
   "description": "Mongo Tutorial from Scratch",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha -R'"
+    "test": "nodemon --exec 'mocha -R min'"
   },
   "author": "Denzel C. Adams (Corduroy)",
   "license": "ISC",
