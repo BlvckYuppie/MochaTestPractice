@@ -8,13 +8,16 @@ describe("Update a User Record", () => {
 
   beforeEach((done) => {
     joe = new User({
-      name: "Joe"
+      name: "Joe",
+      postCount: 0
     });
     moe = new User({
-      name: "Moe"
+      name: "Moe",
+      postCount: 0
     });
     hoe = new User({
-      name: "Hoe"
+      name: "Hoe",
+      postCount: 0
     });
 
     joe.save()
@@ -40,6 +43,7 @@ describe("Update a User Record", () => {
   };
 
   it('model instance can update using .set() and .save()', (done) => {
+    console.log(joe.postCount);
     joe.set('name', 'Joseph');
     assertName(joe.save(), done);
   });
@@ -70,8 +74,12 @@ describe("Update a User Record", () => {
     )
   });
 
-
-
-
-
+  it('A User can have their posts increment by 1', (done) => {
+    User.update({name:"Joe"}, {$inc: {postCount: 1} })
+      .then(() => User.findOne({name: "Joe"}))
+      .then((user) => {
+        assert(user.postCount === 1 );
+        done();
+      })
+  });
 })
