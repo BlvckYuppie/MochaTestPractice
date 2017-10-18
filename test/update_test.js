@@ -43,7 +43,6 @@ describe("Update a User Record", () => {
   };
 
   it('model instance can update using .set() and .save()', (done) => {
-    console.log(joe.postCount);
     joe.set('name', 'Joseph');
     assertName(joe.save(), done);
   });
