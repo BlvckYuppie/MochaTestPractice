@@ -21,7 +21,51 @@ describe('Subdocuments', () => {
   });
 
   it('can add subdocuments to an existing record.', (done) => {
-    
+    const joe = new User({
+      name: "Joe",
+      posts: [
+        { title: "I'm a post." }
+      ],
+      postCount: 1,
+    });
+
+    joe.save()
+      .then(() => User.findOne({name: "Joe"}))
+      .then((user) => {
+        user.posts.push({title: "I'm post 2"});
+        return user.save();
+      })
+      .then(() => User.update({name:"Joe"}, {$inc: {postCount: 1} }))
+      .then(() => User.findOne({name: "Joe"}))
+      .then((user) => {
+        assert(user.posts[0].title === "I'm a post.");
+        assert(user.posts[1].title === "I'm post 2");
+        assert(user.postCount === 2)
+        done();
+      })
+  });
+
+  it('can remove an existing sub document', (done) => {
+    const joe = new User({
+      name: "Joe",
+      posts: [
+        { title: "I'm a post." }
+      ],
+      postCount: 1,
+    });
+
+    joe.save()
+      .then(() => User.findOne({name: "Joe"}))
+      .then((user) => {
+        user.posts[0].remove();
+        return user.save()
+      })
+      .then(() => User.findOne({name: "Joe"}))
+      .then((user) => {
+        assert(user.posts[0] === undefined);
+        assert(user.posts.length === 0);
+        done();
+      })
   });
 
 
