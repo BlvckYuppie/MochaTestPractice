@@ -1,7 +1,7 @@
 {
   "name": "users",
   "version": "1.0.0",
-  "description": "Mongo Tutorial from Scratch",
+  "description": "Mongo / Mocha / TDD from Scratch",
   "main": "index.js",
   "scripts": {
     "test": "nodemon --exec 'mocha -R min'"
