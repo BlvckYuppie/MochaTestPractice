@@ -1,7 +1,10 @@
-MochaTestPractice
+**MochaTestPractice**
 ===================
 
-*A TDD / mongo method practice session.* 
+
+*A TDD / mongo method practice session.*
+----------------------------------------
+
 
 
 
@@ -13,5 +16,8 @@ The idea being, repitition should allow me to become more efficient at test writ
 
 The goal is to spend a week writing nothing but tests.  I will push my commit's up with each passing test. 
 
-Feel free to fork n' clone this repo.  Once the code's on your machine,  cd to the directory in terminal and run ***npm run test*** to execute the test suite. 
+Feel free to fork n' clone this repo.  Once the code is on your machine, ***cd***  to the directory in terminal and run 
 
+> **npm run test**
+
+to execute the test suite. 
