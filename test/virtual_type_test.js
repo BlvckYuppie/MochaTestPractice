@@ -4,7 +4,7 @@ const User = require("../src/user");
 describe('Virtual Types', () => {
 
   it('postcount returns number of posts', (done) => {
-    cosnt joe = new User({
+    const joe = new User({
       name:"Joe",
       posts: [{title:"1st post"}]
     });
@@ -12,10 +12,17 @@ describe('Virtual Types', () => {
     joe.save()
       .then(() => User.findOne({name:"Joe"}))
       .then((user)=> {
-
         assert(joe.postCount === 1);
         done();
       })
   });
 
 });
+
+
+
+// const User = require("../src/user");
+// const joe = new User({
+//   name:"Joe",
+//   posts: [{title:"1st post"}]
+// });

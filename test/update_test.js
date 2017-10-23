@@ -9,15 +9,15 @@ describe("Update a User Record", () => {
   beforeEach((done) => {
     joe = new User({
       name: "Joe",
-      postCount: 0
+      likes: 0
     });
     moe = new User({
       name: "Moe",
-      postCount: 0
+      likes: 0
     });
     hoe = new User({
       name: "Hoe",
-      postCount: 0
+      likes: 0
     });
 
     joe.save()
@@ -74,10 +74,10 @@ describe("Update a User Record", () => {
   });
 
   it('A User can have their posts increment by 1', (done) => {
-    User.update({name:"Joe"}, {$inc: {postCount: 1} })
+    User.update({name:"Joe"}, {$inc: {likes: 1} })
       .then(() => User.findOne({name: "Joe"}))
       .then((user) => {
-        assert(user.postCount === 1 );
+        assert(user.likes === 1 );
         done();
       })
   });
