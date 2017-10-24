@@ -23,10 +23,10 @@ describe('Associations', (done) => {
       content:"This post is worse than the first Post"
     });
     comment = new Comment({
-      content: "this post was short and crappy"
+      content: "This post was short and crappy"
     });
     comment2 = new Comment({
-      content: "this post was longer than the first, but still crap"
+      content: "This post was longer than the first, but still crap"
     });
 
     joe.blogPosts.push(blogPost);
@@ -47,11 +47,47 @@ describe('Associations', (done) => {
   });
 
 it('Saves a relationship between a user and a blogPost', (done) => {
-  User.findOne({name: "Joe" }).populate('blogPosts')
+  User.findOne({name: "Joe" })
+  .populate('blogPosts')
   .then((user) => {
     assert(user.blogPosts[0].title === "1st Post");
     return done();
   });
 });
+
+it('Saves the relationship between a Users blogPost and a comment tree', (done) => {
+  User.findOne({name:"Joe"})
+  .populate({
+    path:"blogPosts",
+    populate: {
+      path: "comments",
+      model:'comment',
+    },
+  })
+  .then((user) => {
+    assert(user.blogPosts[0].comments[0].content === "This post was short and crappy");
+    done();
+  })
+});
+
+it('Saves the relationship between a Users blogPost and a comment tree', (done) => {
+  User.findOne({name:"Joe"})
+  .populate({
+    path:"blogPosts",
+    populate: {
+      path: "comments",
+      model:'comment',
+      populate:{
+        path:"user",
+        model:"user"
+      }
+    },
+  })
+  .then((user) => {
+    assert(user.blogPosts[0].comments[0].user.name === "Joe");
+    done();
+  })
+});
+
 
 });

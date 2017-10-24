@@ -3,17 +3,22 @@ const User = require("../src/user");
 
 describe('Subdocuments', () => {
 
-  it('can create a subdocument', (done) => {
-    const joe = new User({
-      name: "Joe",
-      posts: [
-        { title: "I'm a post." }
-      ],
-      postCount: 1,
-    });
+  beforeEach(function(done) {
+    this.timeout(5000);
+   const joe = new User({
+     name: "Joe",
+     posts: [{
+       title: "I'm a post."
+    }],
+    postCount: 1,
+   });
 
     joe.save()
-      .then(() => User.findOne({name:"Joe"}))
+      .then(() => done());
+  });
+
+  it('can create a subdocument', (done) => {
+     User.findOne({name:"Joe"})
       .then((user)=>{
           assert(user.posts[0].title === "I'm a post.")
           done();
@@ -21,16 +26,8 @@ describe('Subdocuments', () => {
   });
 
   it('can add subdocuments to an existing record.', (done) => {
-    const joe = new User({
-      name: "Joe",
-      posts: [
-        { title: "I'm a post." }
-      ],
-      postCount: 1,
-    });
 
-    joe.save()
-      .then(() => User.findOne({name: "Joe"}))
+     User.findOne({name: "Joe"})
       .then((user) => {
         user.posts.push({title: "I'm post 2"});
         return user.save();
@@ -46,16 +43,7 @@ describe('Subdocuments', () => {
   });
 
   it('can remove an existing sub document', (done) => {
-    const joe = new User({
-      name: "Joe",
-      posts: [
-        { title: "I'm a post." }
-      ],
-      postCount: 1,
-    });
-
-    joe.save()
-      .then(() => User.findOne({name: "Joe"}))
+    User.findOne({name: "Joe"})
       .then((user) => {
         user.posts[0].remove();
         return user.save()
