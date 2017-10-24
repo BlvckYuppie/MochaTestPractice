@@ -18,26 +18,38 @@ describe('Associations', (done) => {
       title:"1st Post",
       content:"This is the first Post"
     });
+    blogPost2 = new BlogPost({
+      title:"2nd Post",
+      content:"This post is worse than the first Post"
+    });
     comment = new Comment({
       content: "this post was short and crappy"
     });
+    comment2 = new Comment({
+      content: "this post was longer than the first, but still crap"
+    });
 
     joe.blogPosts.push(blogPost);
+    joe.blogPosts.push(blogPost2);
     blogPost.comments.push(comment);
+    blogPost2.comments.push(comment2);
     comment.user = joe;
+    comment2.user = joe;
 
     Promise.all([
       joe.save(),
       blogPost.save(),
+      blogPost2.save(),
       comment.save(),
+      comment2.save(),
     ])
       .then(() => done());
   });
 
-it.only('Saves a relationship between a user and a blogPost', (done) => {
-  User.findOne({name: "Joe" })
+it('Saves a relationship between a user and a blogPost', (done) => {
+  User.findOne({name: "Joe" }).populate('blogPosts')
   .then((user) => {
-    console.log(user.blogPosts);
+    assert(user.blogPosts[0].title === "1st Post");
     return done();
   });
 });

@@ -4,7 +4,8 @@ const User = require("../src/user");
 describe("Delete Test!" + " Deleting User Record From DB" , () => {
   let joe;
 
-  beforeEach((done) => {
+  beforeEach(function(done) {
+    this.timeout(5000)
    joe = new User({name: "joe"});
 
     joe.save()
