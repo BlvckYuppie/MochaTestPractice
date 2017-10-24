@@ -17,8 +17,6 @@ describe('Virtual Types', () => {
     Promise.all( [ joe.save(), blogPost.save() ])
       .then(() => User.findOne({name:"Joe"}))
       .then((user)=> {
-        console.log(joe.postcount);
-        console.log(joe.blogPosts);
         assert(joe.postCount === 1);
         done();
       })
