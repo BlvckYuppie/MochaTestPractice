@@ -21,7 +21,7 @@ const UserSchema = new Schema({
 });
 
 UserSchema.virtual("postCount").get(function(){
-  return this.posts.length;
+  return this.blogPosts.length;
   console.log("hi i'm working");
 });
 const User = mongoose.model("user", UserSchema);

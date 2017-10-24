@@ -32,12 +32,11 @@ describe('Subdocuments', () => {
         user.posts.push({title: "I'm post 2"});
         return user.save();
       })
-      .then(() => User.update({name:"Joe"}, {$inc: {postCount: 1} }))
+      .then(() => User.update({name:"Joe"}))
       .then(() => User.findOne({name: "Joe"}))
       .then((user) => {
         assert(user.posts[0].title === "I'm a post.");
         assert(user.posts[1].title === "I'm post 2");
-        assert(user.postCount === 2)
         done();
       })
   });

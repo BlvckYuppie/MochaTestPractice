@@ -84,6 +84,10 @@ it('Saves the relationship between a Users blogPost and a comment tree', (done) 
     },
   })
   .then((user) => {
+    assert(user.name === "Joe");
+    assert(user.blogPosts.length === 2);
+    assert(user.blogPosts[0].title === "1st Post");
+    assert(user.blogPosts[0].comments[0].content === "This post was short and crappy");
     assert(user.blogPosts[0].comments[0].user.name === "Joe");
     done();
   })
