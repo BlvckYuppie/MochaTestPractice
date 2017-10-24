@@ -4,7 +4,8 @@ const BlogPost = require("../src/blogPost");
 
 describe('Virtual Types', () => {
 
-  it('postcount returns number of posts', (done) => {
+  it('postcount returns number of posts', function(done){
+    this.timeout(6000);
     const joe = new User({
       name:"Joe"
     });

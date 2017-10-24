@@ -6,7 +6,8 @@ describe("Update a User Record", () => {
   let moe;
   let hoe;
 
-  beforeEach((done) => {
+  beforeEach(function(done) {
+    this.timeout(5000);
     joe = new User({
       name: "Joe",
       likes: 0
