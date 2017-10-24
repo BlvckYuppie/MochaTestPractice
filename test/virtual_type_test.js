@@ -18,11 +18,3 @@ describe('Virtual Types', () => {
   });
 
 });
-
-
-
-// const User = require("../src/user");
-// const joe = new User({
-//   name:"Joe",
-//   posts: [{title:"1st post"}]
-// });
