@@ -20,7 +20,7 @@ describe('Middleware', () => {
     .then(() => done());
   });
 
-  it.only('Test to see if blogposts are destroyed with users Removal', (done) => {
+  it('Test to see if blogposts are destroyed with users Removal', (done) => {
       joe.remove()
       .then(() => BlogPost.count())
       .then((count) => {
