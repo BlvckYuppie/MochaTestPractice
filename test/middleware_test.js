@@ -17,16 +17,16 @@ describe('Middleware', () => {
     joe.blogPosts.push(blogPost);
 
     Promise.all([joe.save(), blogPost.save()])
-    .then(() => done());
+      .then(() => done());
   });
 
   it('Test to see if blogposts are destroyed with users Removal', (done) => {
-      joe.remove()
-      .then(() => BlogPost.count())
-      .then((count) => {
-        console.log(count);
-        assert (count === 0);
-        done();
+    joe.remove()
+    .then(() => BlogPost.count())
+    .then((count) => {
+      console.log(count);
+      assert (count === 0);
+      done();
     })
   });
 
